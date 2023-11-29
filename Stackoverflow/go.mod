@@ -2,7 +2,12 @@ module github.com/Vimarsh07/ase
 
 go 1.21.4
 
+require github.com/jinzhu/gorm v1.9.16
+
 require (
+    github.com/jinzhu/gorm
+	github.com/prometheus/client_golang/prometheus
+	github.com/prometheus/client_golang/prometheus/promhttp
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
@@ -15,6 +20,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
+	github.com/lib/pq v1.1.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
