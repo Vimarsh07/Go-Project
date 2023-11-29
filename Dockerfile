@@ -1,13 +1,18 @@
-# syntax=docker/dockerfile:1
+# Use the official Go image from the Docker Hub
 FROM golang:1.21.4
-ENV PORT 8080
-ENV HOSTDIR 0.0.0.0
 
-EXPOSE 8080
-WORKDIR /app
-COPY go.mod ./
-COPY go.sum ./
+# Copy the local package files to the container's workspace.
+ADD . /go/src/myapp
+
+# Setting up working directory
+WORKDIR /go/src/myapp
+
+# Install the package.
 RUN go mod tidy
-COPY . ./
 RUN go build -o /stackoverflow
-CMD ["/stackoverflow"]
+
+# Run the command by default when the container starts.
+ENTRYPOINT /stackoverflow
+
+# Document that the service listens on port 8080.
+EXPOSE 8080
