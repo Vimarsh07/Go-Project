@@ -218,7 +218,7 @@ func fetchQuestionsByTag(tag string, maxQuestions int, daysBack int) {
 }
 
 func fetchAnswers(questionID int, daysBack int) {
-	apiKey := "AMnT)yCHOKGmYOUrsT6RvA(("
+	apiKey := "NEwms6EZl4*CWqGm1Rxjpg(("
 	fromDate := time.Now().AddDate(0, 0, -daysBack).Unix()
 	url := fmt.Sprintf("https://api.stackexchange.com/2.3/questions/%d/answers?order=desc&sort=activity&site=stackoverflow&filter=!nNPvSNdWme&key=%s", questionID, apiKey)
 
