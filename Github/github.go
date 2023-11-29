@@ -18,7 +18,7 @@ import (
 const (
 	githubAPIURL = "https://api.github.com/repos/%s/%s/issues?page=%d"
 	dbConnStr    = "host=/cloudsql/mercurial-feat-406520:us-central1:mypostgres port=5432 user=postgres dbname=github password=root sslmode=disable"
-	githubToken  = "" // Replace with your GitHub token
+	githubToken  = "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" // Replace with your GitHub token
 )
 
 var (
