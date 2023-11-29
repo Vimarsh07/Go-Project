@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.21.4
+FROM golang:1.21.3
 ENV PORT 8080
 ENV HOSTDIR 0.0.0.0
 
