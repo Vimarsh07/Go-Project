@@ -3,12 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"gorm.io/gorm"
@@ -136,7 +137,7 @@ func init() {
 }
 
 func fetchQuestionsByTag(tag string, maxQuestions int, daysBack int) {
-	apiKey := "NEwms6EZl4*CWqGm1Rxjpg(("
+	apiKey := ""
 	page := 1
 	var hasMore bool = true
 	var fetchedQuestionsCount int = 0
@@ -167,7 +168,7 @@ func fetchQuestionsByTag(tag string, maxQuestions int, daysBack int) {
 			continue
 		}
 
-		body, err := io.ReadAll(resp.Body)
+		body, err := ioutil.ReadAll(resp.Body)
 		resp.Body.Close()
 		if err != nil {
 			log.Printf("Error reading response body for tag %s on page %d: %v", tag, page, err)
@@ -218,7 +219,7 @@ func fetchQuestionsByTag(tag string, maxQuestions int, daysBack int) {
 }
 
 func fetchAnswers(questionID int, daysBack int) {
-	apiKey := "NEwms6EZl4*CWqGm1Rxjpg(("
+	apiKey := "AMnT)yCHOKGmYOUrsT6RvA(("
 	fromDate := time.Now().AddDate(0, 0, -daysBack).Unix()
 	url := fmt.Sprintf("https://api.stackexchange.com/2.3/questions/%d/answers?order=desc&sort=activity&site=stackoverflow&filter=!nNPvSNdWme&key=%s", questionID, apiKey)
 
@@ -244,7 +245,7 @@ func fetchAnswers(questionID int, daysBack int) {
 		}
 
 		defer resp.Body.Close()
-		body, err := io.ReadAll(resp.Body)
+		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			log.Printf("Error reading response body for question ID %d: %v", questionID, err)
 			return
@@ -283,7 +284,7 @@ func fetchAnswers(questionID int, daysBack int) {
 
 func main() {
 
-	db, err = gorm.Open("postgres", "host=/cloudsql/mercurial-feat-406520:us-central1:mypostgres port=5432 user=postgres dbname=stackoverflow password=root sslmode=disable")
+	db, err = gorm.Open("postgres", "host=/cloudsql/cs588-assignment5:us-central1:mypostgres port=5432 user=postgres dbname=stackoverflowdb password=root sslmode=disable")
 	if err != nil {
 		log.Fatal("Failed to connect to the database:", err)
 	}
