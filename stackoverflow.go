@@ -85,7 +85,18 @@ func main() {
 }
 
 func connectDatabase() *gorm.DB {
-	dsn := "host=localhost user=postgres password=12345678 dbname=ASE5 port=5432 sslmode=disable"
+	username := "postgres"
+	password := "root"
+	databaseName := "stackoverflow"
+	cloudSQLConnectionName := "mercurial-feat-406520:us-central1:mypostgres" // Example: my-project:us-central1:my-instance
+
+	// Construct the DSN (Data Source Name)
+	// The DSN for Google Cloud SQL follows the format:
+	// "host=/cloudsql/instance-connection-name dbname=your-database-name user=your-database-user password=your-database-password sslmode=disable"
+	dsn := fmt.Sprintf("host=/cloudsql/%s dbname=%s user=%s password=%s sslmode=disable",
+		cloudSQLConnectionName, databaseName, username, password)
+
+	// Open the database connection
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
