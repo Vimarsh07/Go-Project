@@ -19,13 +19,12 @@ RUN go mod tidy
 # Copy the entire project
 COPY . ./
 
-# Copy Prometheus configuration file
-COPY prometheus.yml /etc/prometheus/prometheus.yml
+
 
 # Build the Go application
-RUN go build -o /main
+RUN go build -o /stackoverflow
 
 # Command to run the compiled binary
-CMD [ "/main" ]
+CMD [ "/stackoverflow" ]
 
 # You may also need to add a command to start Prometheus, depending on your setup
